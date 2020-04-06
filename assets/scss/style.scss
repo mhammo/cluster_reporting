@@ -1,0 +1,13 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+
+@import 'icons';
+@import 'typography';
+@import 'card';
+@import 'navbar';
+@import 'button';
+@import 'input';
+
+.leaflet-control-attribution {
+  display: none;
+}

@@ -1,0 +1,248 @@
+{
+  "data": {
+    "getChoroplethEmployment": {
+      "edges": [
+        {
+          "node": {
+            "regionCode": "SK",
+            "employment": "2256828.316039"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "DK",
+            "employment": "2168318.199037"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "LT",
+            "employment": "1206027.796017"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "SI",
+            "employment": "913839.068956"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "CZ",
+            "employment": "5174618.538977"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "FR",
+            "employment": "19530105.485889"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "LV",
+            "employment": "881112.612167"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "CY",
+            "employment": "227929.735666"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "RO",
+            "employment": "6432018.805622"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "NL",
+            "employment": "6113576.379675"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "UK",
+            "employment": "23838934.223372"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "HU",
+            "employment": "6381883.298258"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "EE",
+            "employment": "627674.410264"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "AT",
+            "employment": "3492454.423928"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "FI",
+            "employment": "2055149.612239"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "ME",
+            "employment": "115484.253926"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "RS",
+            "employment": "2432475.733693"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "IE",
+            "employment": "4565346.671874"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "PL",
+            "employment": "17502876.697728"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "UA",
+            "employment": "1970500.132706"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "PT",
+            "employment": "3371328.300675"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "ES",
+            "employment": "14588211.162946"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "MT",
+            "employment": "284977.164746"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "NO",
+            "employment": "2748346.211616"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "IL",
+            "employment": "3485092.297778"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "BA",
+            "employment": "1016929.882193"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "IT",
+            "employment": "19024164.322187"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "BG",
+            "employment": "2821247.546563"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "TR",
+            "employment": "13223442.303086"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "IS",
+            "employment": "160228.600048"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "EL",
+            "employment": "3321149.044074"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "KV",
+            "employment": "377313.050355"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "AL",
+            "employment": "1808819.846893"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "HR",
+            "employment": "1248321.953700"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "SE",
+            "employment": "4545513.815302"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "MK",
+            "employment": "424558.497804"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "CH",
+            "employment": "3526389.864183"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "BE",
+            "employment": "2885753.964709"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "DE",
+            "employment": "36408165.663984"
+          }
+        },
+        {
+          "node": {
+            "regionCode": "LU",
+            "employment": "280689.103316"
+          }
+        }
+      ]
+    }
+  }
+}

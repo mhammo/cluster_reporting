@@ -1,0 +1,35 @@
+.navbar {
+  background: $color-secondary;
+  height: $nav-height;
+}
+
+.nav-router-tabs {
+  background: $color-secondary;
+  padding: 20px 40px 0px 40px;
+
+  .nav-link {
+    padding: 30px 40px;
+    border: none;
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: #999;
+
+    &.nuxt-link-exact-active {
+      color: black;
+      position: relative;
+      background: white;
+
+      &:after {
+        content: '';
+        margin: 0px 40px;
+        width: calc(100% - 80px);
+        bottom: 0;
+        left: 0;
+        border-bottom: solid black 3px;
+        position: absolute;
+      }
+    }
+  }
+}

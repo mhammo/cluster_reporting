@@ -1,0 +1,15 @@
+.card {
+  background: $color-secondary;
+  border-radius: 0;
+  border: none;
+  padding: 0.6rem 1.4rem;
+
+  &.card--white {
+    background: white;
+  }
+
+  hr {
+    border: 0.5px solid black;
+    margin: 1.5rem 0;
+  }
+}
