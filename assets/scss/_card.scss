@@ -1,10 +1,10 @@
-.card {
+.map_card {
   background: $color-secondary;
   border-radius: 0;
   border: none;
-  padding: 0.6rem 1.4rem;
+  padding: 2rem;
 
-  &.card--white {
+  &.map_card--white {
     background: white;
   }
 

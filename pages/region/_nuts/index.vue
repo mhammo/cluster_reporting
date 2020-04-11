@@ -1,8 +1,10 @@
 <template>
-  <div v-if="regionByRegionCode">
+  <div v-if="regionByNutsId">
     <h6>
       <map-marker-icon />
-      {{ `${regionByRegionCode.country}, ${regionByRegionCode.region}` }}
+      {{
+        `${regionByNutsId.countryByCountryId.nutsName}, ${regionByNutsId.nutsName}`
+      }}
     </h6>
     <h1>Summary</h1>
     <p>
@@ -17,18 +19,59 @@
 
     <b-row>
       <b-col col lg="6" cols="12">
-        <chart-card title="Specialisation by Sector" />
+        <chart-card :tall="true" title="Specialisation by Sector">
+          <client-only>
+            <apex-chart
+              width="100%"
+              height="1200px"
+              type="bar"
+              :options="{
+                chart: {
+                  offsetY: -30,
+                  id: 'vuechart-example',
+                  toolbar: { show: false }
+                },
+                plotOptions: {
+                  bar: {
+                    horizontal: true,
+                    dataLabels: {
+                      position: 'top'
+                    }
+                  }
+                },
+                xaxis: {
+                  categories:
+                    !$apollo.loading &&
+                    regionalSectorPerformance &&
+                    regionalSectorPerformance.map((x) => x.node.sector)
+                }
+              }"
+              :series="[
+                {
+                  name: 'specialisation',
+                  data:
+                    !$apollo.loading &&
+                    regionalSectorPerformance &&
+                    regionalSectorPerformance.map(
+                      (x) => Math.round(x.node.specialisation * 10) / 10
+                    )
+                }
+              ]"
+            />
+          </client-only>
+        </chart-card>
       </b-col>
       <b-col col lg="6" cols="12">
-        <chart-card />
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col col lg="6" cols="12">
-        <chart-card />
-      </b-col>
-      <b-col col lg="6" cols="12">
-        <chart-card />
+        <b-row>
+          <b-col cols="12">
+            <chart-card />
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="12">
+            <chart-card />
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
   </div>
@@ -44,24 +87,42 @@ export default {
     MapMarkerIcon,
     ChartCard
   },
+  props: {
+    regionByNutsId: {
+      type: Object,
+      default: () => ({ countryByCountryId: { nutsName: '' }, nutsName: '' })
+    },
+    year: {
+      type: Number,
+      default: 2016
+    }
+  },
+  data() {
+    return {}
+  },
   apollo: {
-    // Simple query that will update the 'hello' vue property
-    regionByRegionCode: {
+    regionalSectorPerformance: {
       query() {
         return gql`
-          query RegionalStatistics($nuts: String!) {
-            regionByRegionCode(regionCode: $nuts) {
-              region
-              country
+          query RegionalSectorPerformance($nuts: String!) {
+            regionalSectorPerformance(nuts: $nuts) {
+              edges {
+                node {
+                  sector
+                  specialisation
+                }
+              }
             }
           }
         `
       },
+      prefetch: false,
       variables() {
         return {
           nuts: this.$route.params.nuts
         }
-      }
+      },
+      update: (data) => data.regionalSectorPerformance.edges
     }
   }
 }
