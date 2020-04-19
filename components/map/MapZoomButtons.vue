@@ -7,9 +7,7 @@
       aria-label="Zoom out"
       role="button"
       @click="$emit('zoom-out', null)"
-    >
-      -
-    </a>
+    >-</a>
     <a
       href="#"
       class="btn btm-small map_zoom_button"
@@ -17,9 +15,7 @@
       aria-label="Zoom in"
       role="button"
       @click="$emit('zoom-in', null)"
-    >
-      +
-    </a>
+    >+</a>
   </div>
 </template>
 
@@ -36,8 +32,8 @@ $zoom-button-size: 2rem;
 }
 
 .map_zoom_button {
-  background: $color-dark;
-  color: white;
+  background: $color-background-contrast;
+  color: $color-text-contrast-header;
   padding: 0;
   width: $zoom-button-size;
   height: $zoom-button-size;

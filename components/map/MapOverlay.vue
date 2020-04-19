@@ -9,7 +9,8 @@
           title="Open filter pane"
           aria-label="Open filter pane"
           @click="showFilters"
-          ><filter-outline />
+        >
+          <filter-outline />
         </a>
         <a
           href="#"
@@ -18,8 +19,9 @@
           title="Collapse filter pane"
           aria-label="Collapse filter pane"
           @click="hideFilters"
-          ><chevron-left
-        /></a>
+        >
+          <chevron-left />
+        </a>
         <div class="map_filterbox_body">
           <h4>Select a region</h4>
           <hr />
@@ -125,9 +127,7 @@ export default {
     regionFigures() {
       return (
         this.regionData &&
-        this.regionData
-          .map((x) => x.node[this.category])
-          .filter((x) => !isNaN(x))
+        this.regionData.map((x) => x[this.category]).filter((x) => !isNaN(x))
       )
     }
   },
@@ -173,7 +173,8 @@ export default {
   &.collapsed {
     width: 45px;
     height: 45px;
-    background: $color-dark;
+    background: $color-background-contrast;
+    color: $color-text-contrast-header;
     padding: 0px;
 
     .map_filterbox_body {
@@ -201,7 +202,7 @@ export default {
   padding: 5px 10px 10px 7px;
   font-size: 30px;
   line-height: 30px;
-  color: $color-secondary;
+  color: $color-text-contrast-header;
   opacity: 0;
   pointer-events: none;
   transition-property: opacity;
@@ -216,8 +217,8 @@ export default {
   height: 45px;
   width: 45px;
   margin-right: -45px;
-  background: $color-dark;
-  color: white;
+  background: $color-background-contrast;
+  color: $color-text-contrast-header;
   padding: 5px 10px 10px 7px;
   font-size: 30px;
   line-height: 30px;

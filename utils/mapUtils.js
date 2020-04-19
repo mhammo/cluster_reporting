@@ -1,3 +1,5 @@
+import { gradientColors } from './colors'
+
 const R = require('ramda')
 const topojson = require('topojson')
 
@@ -15,20 +17,10 @@ export const getGradientLevels = (mean, min, max) => {
   ]
 }
 
-export const gradientColors = [
-  '#f2f0f7',
-  '#dadaeb',
-  '#bcbddc',
-  '#9e9ac8',
-  '#807dba',
-  '#6a51a3',
-  '#4a1486'
-]
-
 export const createColorFunction = (levels) => {
   return (d) =>
     d === null
-      ? '#ccc'
+      ? '#efefef'
       : d > levels[0]
       ? gradientColors[6]
       : d > levels[1]
@@ -50,7 +42,7 @@ export const createStyleFunction = (getColor) => {
       fillColor: getColor(feature.properties.value),
       weight: 1,
       opacity: 0.5,
-      color: '#222',
+      color: '#888',
       fillOpacity: 1
     }
   }
@@ -81,8 +73,7 @@ export function topoToGeoJson(data) {
 const convertRegionArrayToDict = (array, key) =>
   R.reduce(
     (dict, row) => {
-      if (row && row.node) dict[row.node.regionCode] = row.node[key]
-
+      if (row) dict[row.regionCode] = row[key]
       return dict
     },
     {},

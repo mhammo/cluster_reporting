@@ -1,20 +1,16 @@
 <template>
   <div v-if="selected && selected.feature.properties.value" class="map_info">
-    <div class="map_info__header">
-      {{ selected ? selected.feature.properties.NUTS_NAME : '' }}
-    </div>
+    <div class="map_info__header">{{ selected ? selected.feature.properties.NUTS_NAME : '' }}</div>
     <div class="map_info__body">
-      <h5 class="map_info__category">
-        Category Type: {{ regionalMetrics[category] }}
-      </h5>
-      <span class="map_info__value">{{
+      <h5 class="map_info__category">Category Type: {{ regionalMetrics[category] }}</h5>
+      <span class="map_info__value">
+        {{
         selected &&
-          selected.feature.properties.value &&
-          numberWithCommas(selected.feature.properties.value)
-      }}</span>
-      <b-btn :to="url" class="map_info__button" variant="primary"
-        >Dashboard</b-btn
-      >
+        selected.feature.properties.value &&
+        numberWithCommas(selected.feature.properties.value)
+        }}
+      </span>
+      <b-btn :to="url" class="map_info__button" variant="primary">Dashboard</b-btn>
     </div>
   </div>
 </template>
@@ -36,7 +32,7 @@ export default {
       return (
         this.selected &&
         this.selected.feature.properties.NUTS_ID &&
-        '/region/' + this.selected.feature.properties.NUTS_ID
+        '/regions/' + this.selected.feature.properties.NUTS_ID
       )
     }
   },
@@ -47,6 +43,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~assets/scss/variables';
+
 .map_info {
   margin: 0;
   padding: 0;
@@ -63,8 +61,8 @@ export default {
   text-align: center;
   display: block;
   text-transform: uppercase;
-  background: #222;
-  color: white;
+  background: $color-background-contrast;
+  color: $color-text-contrast-header;
 }
 
 .map_info__body {

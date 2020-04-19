@@ -2,6 +2,7 @@
 
 html {
   font-family: 'Open Sans', sans-serif;
+  color: $color-text-header;
 }
 
 h1,
@@ -12,4 +13,11 @@ h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
+  color: $color-text-header;
+}
+
+.header--location {
+  .material-design-icon > .material-design-icon__svg {
+    fill: $color-icon-map;
+  }
 }

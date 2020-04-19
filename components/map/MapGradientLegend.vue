@@ -6,8 +6,7 @@
         :key="item"
         :style="{ background: item }"
         class="map_legend__color"
-      >
-      </span>
+      ></span>
     </div>
     <div class="map_legend__labels">
       <span class="map_legend__label">{{ min }}</span>
@@ -17,12 +16,9 @@
 </template>
 
 <script>
-import {
-  gradientColors,
-  extractAggregates,
-  getGradientLevels
-} from '../../utils/mapUtils'
-import { kFormatter } from '../../utils/formatters'
+import { extractAggregates, getGradientLevels } from '~/utils/mapUtils'
+import { gradientColors } from '~/utils/colors'
+import { kFormatter } from '~/utils/formatters'
 export default {
   props: {
     regionData: { type: Array, default: null }

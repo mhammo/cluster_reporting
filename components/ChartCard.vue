@@ -1,18 +1,30 @@
 <template>
-  <div :class="`chart_card ${tall ? 'chart_card--tall' : ''}`">
+  <div :style="`height: ${height}px;`" class="chart_card">
     <h4>{{ title }}</h4>
     <hr />
-    <div class="chart_card__body">
+    <div :style="`height: ${cardBodyHeight}px;`" class="chart_card__body">
+      <Loader :spinning="loading" class="chart_card__loader" />
       <slot />
     </div>
   </div>
 </template>
 
 <script>
+import Loader from './Loader'
+
 export default {
+  components: {
+    Loader
+  },
   props: {
     title: { type: String, default: 'Untitled' },
-    tall: { type: Boolean, default: false }
+    height: { type: Number, default: 440 },
+    loading: { type: Boolean, default: false }
+  },
+  computed: {
+    cardBodyHeight() {
+      return this.height - 100
+    }
   }
 }
 </script>
@@ -21,20 +33,20 @@ export default {
 @import '~assets/scss/variables';
 
 .chart_card {
-  background: $color-secondary;
-  height: 400px;
+  .chart_card__loader {
+    background: $color-background-secondary;
+  }
+}
+
+.chart_card {
+  background: $color-background-secondary;
   margin: 20px 0;
-  border-radius: 1rem;
   padding: 30px;
+  border-top: 2px solid $color-primary;
 
   .chart_card__body {
-    height: 300px;
+    overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  hr {
-    border: none;
-    border-top: 1px solid black;
   }
 
   h4 {
@@ -42,11 +54,13 @@ export default {
     text-transform: uppercase;
   }
 
-  &.chart_card--tall {
-    height: 840px;
+  &.chart_card--long {
+    max-width: 1350px;
 
     .chart_card__body {
-      height: 740px;
+      display: flex;
+      flex-direction: row;
+      overflow-y: hidden;
     }
   }
 }

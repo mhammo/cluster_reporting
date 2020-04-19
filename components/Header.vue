@@ -1,8 +1,8 @@
 <template>
   <b-navbar sticky toggleable="lg" class="py-4">
-    <b-navbar-brand style="background: #ccc; padding: 10px 20px;" href="#"
-      >LOGO</b-navbar-brand
-    >
+    <b-navbar-brand href="#">
+      <img src="/logo.jpg" />
+    </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -26,7 +26,7 @@
           </b-nav-item-dropdown>
         </template>
         <template v-else>
-          <b-button class="mx-1" variant="outline-primary">Register</b-button>
+          <b-button class="mx-1" variant="outline-secondary">Register</b-button>
           <b-button class="mx-1" variant="primary">Log in</b-button>
         </template>
       </b-navbar-nav>

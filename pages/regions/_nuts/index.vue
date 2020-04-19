@@ -1,9 +1,9 @@
 <template>
   <div v-if="regionByNutsId">
-    <h6>
+    <h6 class="header--location">
       <map-marker-icon />
       {{
-        `${regionByNutsId.countryByCountryId.nutsName}, ${regionByNutsId.nutsName}`
+      `${regionByNutsId.countryByCountryId.nutsName}, ${regionByNutsId.nutsName}`
       }}
     </h6>
     <h1>Summary</h1>
@@ -19,7 +19,7 @@
 
     <b-row>
       <b-col col lg="6" cols="12">
-        <chart-card :tall="true" title="Specialisation by Sector">
+        <chart-card :height="920" :title="`${metricString} by Sector`" :loading="$apollo.loading">
           <client-only>
             <apex-chart
               width="100%"
@@ -28,7 +28,7 @@
               :options="{
                 chart: {
                   offsetY: -30,
-                  id: 'vuechart-example',
+                  id: 'chart-sectors',
                   toolbar: { show: false }
                 },
                 plotOptions: {
@@ -40,21 +40,13 @@
                   }
                 },
                 xaxis: {
-                  categories:
-                    !$apollo.loading &&
-                    regionalSectorPerformance &&
-                    regionalSectorPerformance.map((x) => x.node.sector)
+                  categories: sectorAxis
                 }
               }"
               :series="[
                 {
-                  name: 'specialisation',
-                  data:
-                    !$apollo.loading &&
-                    regionalSectorPerformance &&
-                    regionalSectorPerformance.map(
-                      (x) => Math.round(x.node.specialisation * 10) / 10
-                    )
+                  name: metricString,
+                  data: sectorData
                 }
               ]"
             />
@@ -64,12 +56,26 @@
       <b-col col lg="6" cols="12">
         <b-row>
           <b-col cols="12">
-            <chart-card />
+            <chart-card :title="`Top 5 Sectors by ${metricString}`" :loading="$apollo.loading">
+              <top-5-line
+                chartId="chart-top-5"
+                :year="year"
+                :metric="metric"
+                :nuts="$route.params.nuts"
+              />
+            </chart-card>
           </b-col>
         </b-row>
         <b-row>
           <b-col cols="12">
-            <chart-card />
+            <chart-card :title="`Bottom 5 Sectors by ${metricString}`" :loading="$apollo.loading">
+              <bottom-5-line
+                chartId="chart-bottom-5"
+                :year="year"
+                :metric="metric"
+                :nuts="$route.params.nuts"
+              />
+            </chart-card>
           </b-col>
         </b-row>
       </b-col>
@@ -81,11 +87,17 @@
 import gql from 'graphql-tag'
 import MapMarkerIcon from '~/node_modules/vue-material-design-icons/MapMarker'
 import ChartCard from '~/components/ChartCard'
+import Top5Line from './components/Top5Line'
+import Bottom5Line from './components/Bottom5Line'
+import { regionalMetrics } from '~/enums/regionalMetrics'
+import { capitalizeFirstLetter, twoDecimalPlaces } from '~/utils/formatters'
 
 export default {
   components: {
     MapMarkerIcon,
-    ChartCard
+    ChartCard,
+    Top5Line,
+    Bottom5Line
   },
   props: {
     regionByNutsId: {
@@ -95,6 +107,10 @@ export default {
     year: {
       type: Number,
       default: 2016
+    },
+    metric: {
+      type: String,
+      default: 'specialisation'
     }
   },
   data() {
@@ -104,25 +120,38 @@ export default {
     regionalSectorPerformance: {
       query() {
         return gql`
-          query RegionalSectorPerformance($nuts: String!) {
-            regionalSectorPerformance(nuts: $nuts) {
-              edges {
-                node {
-                  sector
-                  specialisation
-                }
+          query RegionalSectorPerformance($nuts: String!, $metric: String!) {
+            regionalSectorPerformance(nuts: $nuts, metric: $metric) {
+              nodes {
+                sector
+                value
               }
             }
           }
         `
       },
-      prefetch: false,
       variables() {
         return {
-          nuts: this.$route.params.nuts
+          nuts: this.$route.params.nuts,
+          metric: this.metric
         }
       },
-      update: (data) => data.regionalSectorPerformance.edges
+      update: (data) => data.regionalSectorPerformance.nodes
+    }
+  },
+  computed: {
+    sectorAxis() {
+      return !this.$apollo.loading && this.regionalSectorPerformance
+        ? this.regionalSectorPerformance.map((x) => x.sector)
+        : []
+    },
+    sectorData() {
+      return !this.$apollo.loading && this.regionalSectorPerformance
+        ? this.regionalSectorPerformance.map((x) => twoDecimalPlaces(x.value))
+        : []
+    },
+    metricString() {
+      return capitalizeFirstLetter(regionalMetrics[this.metric])
     }
   }
 }

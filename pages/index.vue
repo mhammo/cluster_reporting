@@ -1,84 +1,90 @@
 <template>
-  <client-only>
-    <Map
-      @change-category="changeCategory"
-      @change-region-type="changeRegionType"
-      @change-year="changeYear"
-      v-bind="{
-        regionData,
-        loading: $apollo.loading,
-        category,
-        year,
-        regionType,
-        options: {
-          zoomControl: false,
-          zoom: 4,
-          center: [55.9464418, 8.1277591]
-        }
-      }"
-    />
-  </client-only>
+  <b-container fluid class="main-content">
+    <h1 class="header">Explore our industrial clusters</h1>
+    <p
+      class="sub_header"
+    >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <b-row>
+      <b-col cols lg="4">
+        <div class="entry_card">
+          <h2>Explore by region</h2>
+          <div class="entry_card__body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <a href="/regions" role="button" class="btn btn-primary">Explore</a>
+          </div>
+        </div>
+      </b-col>
+      <b-col cols lg="4">
+        <div class="entry_card">
+          <h2>Explore by cluster organisation</h2>
+          <div class="entry_card__body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <a
+              href="/regions"
+              role="button"
+              class="btn btn-primary disabled"
+              disabled="disabled"
+            >Explore</a>
+          </div>
+        </div>
+      </b-col>
+      <b-col cols lg="4">
+        <div class="entry_card">
+          <h2>Explore by sector</h2>
+          <div class="entry_card__body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <a
+              href="/regions"
+              role="button"
+              class="btn btn-primary disabled"
+              disabled="disabled"
+            >Explore</a>
+          </div>
+        </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
-<script>
-import gql from 'graphql-tag'
-import Map from '~/components/map/Map.vue'
+<style lang="scss" scoped>
+@import '~assets/scss/variables';
 
-export default {
-  components: {
-    Map
-  },
-  apollo: {
-    // Simple query that will update the 'hello' vue property
-    regionalMetrics: {
-      query() {
-        return gql`
-        query RegionalStatistics($year: Int!, $regionType: Int!) {
-          getRegionalStatistics(yr: $year, regionType: $regionType) {
-            edges {
-              node {
-                regionCode
-                ${this.category}
-              }
-            }
-          }
-        }
-      `
-      },
-      variables() {
-        return {
-          year: this.year,
-          regionType: this.regionType
-        }
-      },
-      result(key) {
-        if (!key.loading && key.data && key.data.getRegionalStatistics)
-          this.regionData = key.data.getRegionalStatistics.edges.map((x) => {
-            const r = x
-            r.node[this.category] = parseInt(x.node[this.category])
-            return r
-          })
-      }
-    }
-  },
-  data() {
-    return {
-      regionData: [],
-      category: 'employment',
-      year: 2016,
-      regionType: 1
-    }
-  },
-  methods: {
-    changeCategory(metric) {
-      this.category = metric
-    },
-    changeRegionType(type) {
-      this.regionType = type
-    },
-    changeYear(yearValue) {
-      this.year = yearValue
+.main-content {
+  max-width: 1500px;
+}
+
+.header {
+  text-align: center;
+  margin: 60px auto 30px auto;
+}
+
+.sub_header {
+  max-width: 750px;
+  text-align: center;
+  margin: 0 auto 60px auto;
+}
+
+.entry_card {
+  padding: 60px 50px;
+  min-height: 540px;
+  text-align: center;
+  background: $color-background-secondary;
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin-bottom: 30px;
+  }
+
+  .entry_card__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    justify-content: space-between;
+
+    .btn {
+      align-self: center;
     }
   }
 }
-</script>
+</style>

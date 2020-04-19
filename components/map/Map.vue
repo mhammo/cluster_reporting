@@ -1,35 +1,34 @@
 <template>
-  <div class="map_container">
-    <div class="map_wrap">
-      <l-map ref="regionMap" :options="options">
-        <l-tile-layer
-          :options="{ maxZoom: 6, minZoom: 3 }"
-          url="https://api.mapbox.com/styles/v1/markhammond/ck8ht2tf50aoy1iny4ixo8068/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWFya2hhbW1vbmQiLCJhIjoiY2prbnRiZWZnMmllODNwbXp5YXR5NWxxbyJ9.1a4LPkQiu-lbEP4dtC7xUA"
-        ></l-tile-layer>
-        <choropleth-layer
-          v-bind="{
+  <client-only>
+    <div class="map_container">
+      <div class="map_wrap">
+        <l-map ref="regionMap" :options="options">
+          <l-tile-layer
+            :options="{ maxZoom: 6, minZoom: 3 }"
+            url="https://api.mapbox.com/styles/v1/markhammond/ck8htp1zf072y1iqdr3j9plpd/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoibWFya2hhbW1vbmQiLCJhIjoiY2prbnRiZWZnMmllODNwbXp5YXR5NWxxbyJ9.1a4LPkQiu-lbEP4dtC7xUA"
+          ></l-tile-layer>
+          <choropleth-layer
+            v-bind="{
             regionType,
             category,
             year,
             regionData
           }"
-          @hover="setHovered"
-        />
-      </l-map>
-      <map-zoom-buttons
+            @hover="setHovered"
+            @selected="setSelected"
+          />
+        </l-map>
+        <map-zoom-buttons v-if="showFilters" @zoom-in="zoomIn" @zoom-out="zoomOut" />
+      </div>
+      <map-overlay
         v-if="showFilters"
-        @zoom-in="zoomIn"
-        @zoom-out="zoomOut"
+        v-bind="{ regionType, selected: currentTarget, category, regionData }"
+        @change-region-type="changeRegionType"
+        @change-category="changeCategory"
+        @change-year="changeYear"
       />
     </div>
-    <map-overlay
-      v-if="showFilters"
-      v-bind="{ regionType, selected: currentTarget, category, regionData }"
-      @change-region-type="changeRegionType"
-      @change-category="changeCategory"
-      @change-year="changeYear"
-    />
-  </div>
+  </client-only>
 </template>
 
 <script>
@@ -83,6 +82,10 @@ export default {
     },
     setHovered(hovered) {
       this.currentTarget = hovered
+    },
+    setSelected(selected) {
+      this.selected = selected
+      this.$emit('selected', selected)
     },
     zoomIn() {
       const map = this.$refs.regionMap.mapObject

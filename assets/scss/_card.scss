@@ -1,5 +1,5 @@
 .map_card {
-  background: $color-secondary;
+  background: $color-background-primary;
   border-radius: 0;
   border: none;
   padding: 2rem;
@@ -9,7 +9,6 @@
   }
 
   hr {
-    border: 0.5px solid black;
     margin: 1.5rem 0;
   }
 }

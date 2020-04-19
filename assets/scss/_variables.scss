@@ -1,9 +1,42 @@
-$color-secondary: #eeedf4;
-$color-contrast: #777;
-$color-dark: #232323;
+$color-background-primary: #ecf2f2;
+$color-background-secondary: #fff;
+$color-background-contrast: #252b41;
+$color-background-dark: #001228;
+
+$color-primary: #40bca2;
+
+$color-text-primary: #222;
+$color-text-muted: #999;
+$color-text-header: #1f3b6d;
+$color-text-contrast: #aaaab2;
+$color-text-contrast-header: #fff;
+$color-icon-map: #df5d5f;
+
+@mixin color-contrast {
+  color: $color-text-contrast;
+  background: $color-background-contrast;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $color-text-contrast-header;
+  }
+
+  .text-muted {
+    color: $color-text-contrast !important;
+  }
+
+  .material-design-icon > .material-design-icon__svg {
+    fill: $color-text-contrast-header;
+  }
+}
 
 $theme-colors: (
-  'primary': #232323
+  'primary': #11a8dd,
+  'secondary': $color-text-header
 );
 
 $nav-height: 98px;

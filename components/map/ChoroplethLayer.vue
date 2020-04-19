@@ -75,7 +75,7 @@ export default {
     zoomToFeature(e) {
       this.mapObject.fitBounds(e.target.getBounds())
       this.selected = e
-      this.$emit('select', e)
+      this.$emit('selected', e.target)
       this.highlightFeature(e)
     },
     onEachFeature(feature, layer) {
@@ -121,7 +121,7 @@ export default {
       this.getTopoJson((topo) => {
         const key = this.category
         const figures = this.regionData
-          .map((x) => x.node[key])
+          .map((x) => x[key])
           .filter((x) => !isNaN(x))
         const { min, max, sum, count } = extractAggregates(figures)
         const mean = sum / count
