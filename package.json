@@ -39,7 +39,7 @@
     "echarts": "^4.7.0",
     "graphql-tag": "^2.10.3",
     "leaflet": "^1.6.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nuxt": "^2.0.0",
     "nuxt-leaflet": "0.0.21",
     "ramda": "^0.27.0",
